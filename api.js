@@ -1,14 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv')
-
+const dotenv = require('dotenv');
 dotenv.load()
 
 const Ingredient = require('./models/Ingredient');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000 ;
 
 const driver = process.env.MONGO_USER_DETAILS;
 
@@ -24,7 +23,6 @@ mongoose.connection.on('error', () => {
 
 app.use(cors());
 app.use(express.json());
-
 
 app.get('/', (req, res) => {
   Ingredient.find({})
